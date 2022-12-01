@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { User } from '../../types/appTypes';
 import { logout } from '../../utils';
 import classes from './Layout.module.css'
 
 const Navigation = () => {
-  const isLoggedIn = localStorage.getItem('token');
+  const user: User = JSON.parse(localStorage.getItem('user') || '{}');
+  const { token } = user;
 
   const logoutHandler = () => {
     logout();
@@ -15,7 +17,7 @@ const Navigation = () => {
       <div className={classes.logo}>Ficti Bank</div>
       <nav>
         <ul>
-          {isLoggedIn ? (
+          {token ? (
             <>
               <li>
                 Hello!
