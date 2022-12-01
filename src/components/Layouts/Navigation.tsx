@@ -4,7 +4,7 @@ import { User } from '../../types/appTypes';
 import { logout } from '../../utils';
 import classes from './Layout.module.css'
 
-const Navigation = () => {
+const Navigation = (): JSX.Element => {
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
   const { token } = user;
 

@@ -1,34 +1,35 @@
 import React, { useRef } from 'react';
 import Styles from './Auth.module.css';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { postData } from '../../utils';
+import { signupData } from '../../types/appTypes';
 
-const url =process.env.REACT_APP_API_URL + '/auth/signup';
+const url: string =process.env.REACT_APP_API_URL + '/auth/signup';
 
 const Signup = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const name = useRef();
-  const email = useRef();
-  const password = useRef();
-  const phoneNumber = useRef();
+  const name = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+  const phoneNumber = useRef<HTMLInputElement>(null);
 
 
-   const handleSubmit = async(e) => {
+   const handleSubmit = async(e: any) => {
     e.preventDefault();
 
-    const data = {
-      name: name.current.value,
-      email: email.current.value,
-      password: password.current.value,
-      phone_number: phoneNumber.current.value
+    const data: signupData = {
+      name: name.current ? name.current.value : '',
+      email: email.current ? email.current.value : '',
+      password: password.current ? password.current.value : '',
+      phone_number: phoneNumber.current ? phoneNumber.current.value : '',
     };
      
      try {
        const response = await postData(url, data);
       if(response.status === 201) {
-        navigate('/login');
+        // navigate('/login');
       }
      } catch (error) {
         console.log(error);
@@ -65,7 +66,7 @@ const Signup = () => {
             <input
               type="password"
               required
-              minLength="6"
+              // minLength="6"
               placeholder="Password"
               className={Styles.loginInput}
               ref={password}
@@ -74,7 +75,6 @@ const Signup = () => {
             <input
               type="text"
               required
-              minLength="6"
               placeholder="Enter phone number"
               className={Styles.loginInput}
               ref={phoneNumber}
