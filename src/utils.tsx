@@ -2,9 +2,7 @@ import axios from 'axios';
 import { signupData } from './types/appTypes';
 
 export const logout: Function = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('expirationDate');
-  localStorage.removeItem('userId');
+  localStorage.removeItem('user');
 }
 
 export const postData = async (url: string, data: signupData): Promise<any> => {

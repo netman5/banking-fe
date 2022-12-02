@@ -1,15 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { User } from '../../types/appTypes';
 import { logout } from '../../utils';
 import classes from './Layout.module.css'
 
 const Navigation = (): JSX.Element => {
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
+  const navigate = useNavigate();
   const { token } = user;
 
   const logoutHandler = () => {
     logout();
+    navigate('/login');
   }
 
   return (
@@ -19,9 +21,6 @@ const Navigation = (): JSX.Element => {
         <ul>
           {token ? (
             <>
-              <li>
-                Hello!
-              </li>
               <li>
                 <Link to="/">Home</Link>
               </li>
