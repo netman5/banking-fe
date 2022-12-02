@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { postData } from '../../utils';
 import { signupData } from '../../types/appTypes';
 
-const url: string =process.env.REACT_APP_API_URL + '/auth/signup';
+const url: string = process.env.REACT_APP_API_URL + '/auth/signup';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Signup = () => {
   const phoneNumber = useRef<HTMLInputElement>(null);
 
 
-   const handleSubmit = async(e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const data: signupData = {
@@ -25,17 +25,17 @@ const Signup = () => {
       password: password.current ? password.current.value : '',
       phone_number: phoneNumber.current ? phoneNumber.current.value : '',
     };
-     
-     try {
-       const response = await postData(url, data);
-      if(response.status === 201) {
+
+    try {
+      const response = await postData(url, data);
+      if (response.status === 201) {
         navigate('/login');
       }
-     } catch (error) {
-        console.log(error);
-      }
-   };
-  
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={Styles.login}>
       <div className={Styles.loginWrapper}>
@@ -47,7 +47,7 @@ const Signup = () => {
         </div>
 
         <div className={Styles.loginRight}>
-          <form className={Styles.loginBox} onSubmit={handleSubmit}>
+          <form className={`${Styles.signupBox} ${Styles.authBox}`} onSubmit={handleSubmit}>
             <input
               type="text"
               required

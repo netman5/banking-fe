@@ -39,7 +39,7 @@ const Login = () => {
         </div>
 
         <div className={Styles.loginRight}>
-          <form className={Styles.loginBox} onSubmit={handleSubmit}>
+          <form className={`${Styles.loginBox} ${Styles.authBox}`} onSubmit={handleSubmit}>
             <input
               type="email"
               placeholder="Email"
