@@ -4,6 +4,12 @@
   margin: 0 auto;
 }
 
+.spendingBox{
+  border: 1px solid blue;
+  width: 100%;
+  display: flex;
+}
+
 .spending{
   width: 65%;
   border: 1px solid red;

@@ -11,6 +11,7 @@ const MasterCard = () => {
         issuer='mastercard'
         theme='dark'
       /> */}
+      <p>Cards goes here</p>
     </>
   )
 }

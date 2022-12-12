@@ -10,7 +10,7 @@ const Account = () => {
     <div className={Styles.container}>
       <div className={Styles.spending}>
         <h1>Welcome to Ficti Bank, Ola!</h1>
-        <div>
+        <div className={Styles.spendingBox}>
           <div>
             <h2>Expenses by categories</h2>
           </div>
