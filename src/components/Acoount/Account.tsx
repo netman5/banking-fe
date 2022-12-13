@@ -1,6 +1,8 @@
 import React from 'react'
 import { User } from '../../types/appTypes';
 import Styles from './Account.module.css'
+import AccountInfo from './AccountInfo';
+import MasterCard from './Card';
 
 const Account = () => {
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
@@ -22,15 +24,11 @@ const Account = () => {
       </div>
       <div className={Styles.account}>
         <h2>Account</h2>
+        <MasterCard />
         balance: $100
         <div>
           <h3>Information</h3>
-          <div>
-            <span>status: Active</span>
-            <span>Account Type: Current</span>
-            <span>Account Number: 123456789</span>
-            Currency: USD
-          </div>
+          <AccountInfo />
           <div>
           </div>
         </div>
