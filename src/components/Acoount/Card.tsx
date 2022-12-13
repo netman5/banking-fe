@@ -1,17 +1,18 @@
-// import { Card } from 'react-credit-card-payment'
+import Card from "react-credit-cards";
+import "react-credit-cards/es/styles-compiled.css";
 
 
 const MasterCard = () => {
+  const Somename = 'John Doe'
   return (
     <>
-      {/* <Card
-        bankName='Ficti Bank'
-        cardHolder='Andrew White'
-        cardNumber='1234567898765432'
-        issuer='mastercard'
-        theme='dark'
-      /> */}
-      <p>Cards goes here</p>
+      <Card
+        name={`${Somename}`}
+        number="5555 4444 3333 1111"
+        expiry="10/25"
+        cvc="737"
+        issuer="Ficti Bank"
+      />
     </>
   )
 }
