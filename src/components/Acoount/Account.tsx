@@ -1,17 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { User } from '../../types/appTypes';
+import { getAccountById } from '../../utils';
 import Styles from './Account.module.css'
 import AccountInfo from './AccountInfo';
 import MasterCard from './Card';
 
 const Account = () => {
+  const [account, setAccount] = useState<any>(null);
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
-  const { id } = user;
-  console.log(id)
+  const { id, token } = user;
+  const url = process.env.REACT_APP_API_URL + '/accounts';
+
+  useEffect(() => {
+    const userAccount = async () => {
+      const account = await getAccountById(id, url, token);
+      setAccount(account);
+    }
+    userAccount();
+  }, [id, token, url])
+
+  if (!account) {
+    return <div>Loading...</div>
+  }
+
+  const { name, balance, accountNumber } = account;
+
   return (
     <div className={Styles.container}>
       <div className={Styles.spending}>
-        <h1>Welcome Ola!</h1>
+        <h1>{`Welcome ${name}!`}</h1>
         <div className={Styles.spendingBox}>
           <div>
             <h2>Expenses by categories</h2>
@@ -24,11 +41,11 @@ const Account = () => {
       </div>
       <div className={Styles.account}>
         <h2>Account</h2>
-        <MasterCard />
-        <p>Account balance: $100</p>
+        <MasterCard name={name} />
+        <p>Account balance: ${`${balance}`}</p>
         <div>
           <h3>Information</h3>
-          <AccountInfo />
+          <AccountInfo accountNumber={accountNumber} />
           <div>
           </div>
         </div>

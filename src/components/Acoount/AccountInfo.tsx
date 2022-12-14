@@ -1,11 +1,11 @@
 import React from 'react'
 
-const AccountInfo = () => {
+const AccountInfo = (props: any) => {
   return (
     <div>
       <span>status: Active</span>
       <span>Account Type: Current</span>
-      <span>Account Number: 123456789</span>
+      <span>Account Number: {props.accountNumber}</span>
       Currency: USD
     </div>
   )
