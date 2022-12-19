@@ -5,6 +5,7 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Home from './components/Home/Home';
 import Layout from './components/Layouts/Layout';
+import CreateNewTransaction from './components/transacts/Transactions';
 import { User } from './types/appTypes';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             {token ? (
               <>
                 <Route path="/" element={<Home />} />
+                <Route path='/new-transactions' element={<CreateNewTransaction />} />
               </>
             ) : <Route path="/login" element={<Login />} />}
           </Routes>

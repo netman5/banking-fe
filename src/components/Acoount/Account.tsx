@@ -4,9 +4,13 @@ import { getAccountById } from '../../utils';
 import Styles from './Account.module.css'
 import AccountInfo from './AccountInfo';
 import MasterCard from './Card';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 const Account = () => {
   const [account, setAccount] = useState<any>(null);
+  const navigate = useNavigate();
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
   const { id, token } = user;
   const url = process.env.REACT_APP_API_URL + '/accounts';
@@ -47,6 +51,11 @@ const Account = () => {
           <h3>Information</h3>
           <AccountInfo accountNumber={accountNumber} />
           <div>
+            <button type='button' className='btn btn-primary' style={{ 'display': 'flex', 'alignItems': 'center', 'gap': '10px' }}
+              onClick={() => navigate('/new-transactions')}
+            >
+              <AiOutlinePlus />
+              New transaction</button>
           </div>
         </div>
       </div>

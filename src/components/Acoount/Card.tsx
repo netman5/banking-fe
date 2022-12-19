@@ -10,7 +10,7 @@ const MasterCard = (props: any) => {
         number="5555 4444 3333 1111"
         expiry="10/25"
         cvc="737"
-        issuer="Ficti Bank"
+        preview={true}
       />
     </>
   )
