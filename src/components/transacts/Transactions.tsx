@@ -1,15 +1,30 @@
 import React from 'react'
 import { BsArrowLeftCircleFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
+import { User } from '../../types/appTypes'
+import { postTransaction } from '../../utils'
+
+
 const CreateNewTransaction = () => {
   const navigate = useNavigate()
+  const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
+  const url = process.env.REACT_APP_API_URL + '/transactions'
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
     const formData = new FormData(form)
     const data = Object.fromEntries(formData)
-    console.log(data)
+    const response = await postTransaction(url, data, token)
+
+    if (response) {
+      alert('Transaction created successfully')
+      setTimeout(() => {
+        navigate('/')
+      }, 2000);
+    } else {
+      alert('Transaction failed')
+    }
   }
 
   return (
