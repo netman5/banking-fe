@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 const Account = () => {
   const [account, setAccount] = useState<any>(null);
   const navigate = useNavigate();
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
   const { id, token } = user;
   const url = process.env.REACT_APP_API_URL + '/accounts';

@@ -15,9 +15,17 @@ const CreateNewTransaction = () => {
     const form = e.currentTarget
     const formData = new FormData(form)
     const data = Object.fromEntries(formData)
-    const response = await postTransaction(url, data, token)
+    let { amount, type, destinationAcctNumber } = data
 
-    if (response) {
+    const newData = {
+      amount: Number(amount),
+      type,
+      destinationAcctNumber
+    }
+    const response = await postTransaction(url, newData, token)
+    console.log(response);
+
+    if (response === 201) {
       alert('Transaction created successfully')
       setTimeout(() => {
         navigate('/')

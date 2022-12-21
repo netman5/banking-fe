@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { signupData, createTransactionData } from './types/appTypes';
+import { signupData } from './types/appTypes';
 
 export const logout: Function = () => {
   localStorage.removeItem('user');
@@ -25,5 +25,5 @@ export const postTransaction = async (url: string, data: any, token: string): Pr
       'Authorization': `Bearer ${token}`
     }
   });
-  return response.data;
+  return response.data.status;
 }
