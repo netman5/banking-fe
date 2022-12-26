@@ -1,50 +1,38 @@
 import React from "react";
-import { AccountContextType, Url, User } from "../types/appTypes";
+import { AccountContextType, createTransactionData, User, account } from "../types/appTypes";
 import axios from 'axios';
 
 export const AccountContext = React.createContext<AccountContextType | null>(null);
 
-export const AccountProvider: React.FC<React.ReactNode> = ({ children }: any) => {
-  const [user, setUser] = React.useState<AccountContextType["user"]>({
-    id: "", token: "", role: "", expireIn: ""
-  });
-  const [account, setAccount] = React.useState<AccountContextType["account"]>([]);
-  const [transaction, setTransaction] = React.useState<AccountContextType["transaction"]>([]);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+interface AccountProviderProps {
+  children: React.ReactNode;
+}
+export const AccountProvider = ({ children }: AccountProviderProps) => {
+  const [account, setAccount] = React.useState<account>({} as account);
 
-  const getUserFromStorage: User = JSON.parse(localStorage.getItem('user') || '{}');
-  setUser({
-    id: getUserFromStorage.id,
-    token: getUserFromStorage.token,
-    role: getUserFromStorage.role,
-    expireIn: getUserFromStorage.expireIn
-  });
-
-  const getAccount = async (url: Url) => {
-    const response = await axios.get(`${url}/${user.id}`, {
+  const getAccount = async (url: string, id: string, token: string) => {
+    const response = await axios.get(`${url}/${id}`, {
       headers: {
-        'Authorization': `Bearer ${user.token}`
+        'Authorization': `Bearer ${token}`
       }
     });
-    setAccount(response.data);
     return response.data;
+
   }
 
-  const createTransaction = async (url: Url, data: any) => {
+  const createTransaction = async (url: string, data: createTransactionData, token: string) => {
     const response = await axios.post(url, data, {
       headers: {
-        'Authorization': `Bearer ${user.token}`
+        'Authorization': `Bearer ${token}`
       }
     });
     return response.data;
   }
 
-  return (
-    <AccountContext.Provider value={{ account, setAccount, transaction, setTransaction, user, setUser, isLoading, setIsLoading, getAccount }}>
-      {children}
-    </AccountContext.Provider>
-  )
-}
+  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount }}>
+    {children}
+  </AccountContext.Provider>
 
+}
 
 export default AccountProvider;

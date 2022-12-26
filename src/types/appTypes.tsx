@@ -55,21 +55,19 @@ export type transaction = {
 }
 
 export type AccountContextType = {
-  account: account[];
-  setAccount: React.Dispatch<React.SetStateAction<account[]>>;
-  transaction: transaction[];
-  setTransaction: React.Dispatch<React.SetStateAction<transaction[]>>;
-  user: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  account: account;
+  setAccount: React.Dispatch<React.SetStateAction<account>>;
+  // transaction: transaction[];
+  // setTransaction: React.Dispatch<React.SetStateAction<transaction[]>>;
+  // isLoading: boolean;
+  // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 
   // login: (data: loginData) => Promise<void>;
   // signup: (data: signupData) => Promise<void>;
   // logout: () => void;
   // createAccount: (data: accountData) => Promise<void>;
-  getAccount: (url: Url) => Promise<void>;
+  getAccount: (url: string, id: string, token: string) => Promise<any>;
   // getTransactions: () => Promise<void>;
-  createTransaction: (url: Url, data: createTransactionData) => Promise<void>;
+  createTransaction: (url: string, data: createTransactionData, token: string) => Promise<any>;
 }
 

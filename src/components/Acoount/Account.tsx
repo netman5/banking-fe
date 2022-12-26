@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { account, User } from '../../types/appTypes';
-import { getAccountById } from '../../utils';
+import React, { useEffect } from 'react'
+import { AccountContext } from '../../context/accountContext';
+import { AccountContextType, User } from '../../types/appTypes';
 import CreateTransactionButton from '../Buttons/Button';
 import Styles from './Account.module.css'
 import AccountInfo from './AccountInfo';
 import MasterCard from './Card';
 
 const Account = () => {
-  const [account, setAccount] = useState<account>();
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
-  const { id, token } = user;
+  const { getAccount, account, setAccount } = React.useContext(AccountContext) as AccountContextType;
   const url = process.env.REACT_APP_API_URL + '/accounts';
 
   useEffect(() => {
     const userAccount = async () => {
-      const account = await getAccountById(id, url, token);
-      setAccount(account);
+      const response = await getAccount(url, user.id, user.token);
+      setAccount(response);
     }
     userAccount();
-  }, [id, token, url])
+  }, [url, setAccount, getAccount, user.id, user.token])
 
   if (!account) {
     return <div>Loading...</div>
