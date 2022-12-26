@@ -43,12 +43,9 @@ export type createTransactionData = {
 }
 
 export type transaction = {
-  id: string;
+  _id: string;
   userId: string[];
   amount: number;
   type: string;
-}
-
-export type transactionResponse = {
-  data: transaction[];
+  destinationAcctNumber: string;
 }

@@ -1,4 +1,4 @@
-export interface User{
+export interface User {
   id: string;
   email: string;
   password: string;
@@ -7,7 +7,7 @@ export interface User{
   phone: string;
 }
 
-export interface Account{
+export interface Account {
   id: string;
   accountNumber: string;
   accountType: string;
@@ -15,19 +15,9 @@ export interface Account{
   userId: string;
 }
 
-export interface Transaction{
-  id: string;
-  transactionType: string;
-  amount: number;
-  date: string;
-  accountId: string;
-}
-
-export interface TransactionType{
+export interface Transaction {
   id: string;
   type: string;
-}
-
-export interface LocalStorageItem{
-  id: string;
+  amount: number;
+  accountId: string;
 }

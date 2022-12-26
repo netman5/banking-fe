@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { User } from '../../types/appTypes';
+import { account, User } from '../../types/appTypes';
 import { getAccountById } from '../../utils';
 import CreateTransactionButton from '../Buttons/Button';
 import Styles from './Account.module.css'
@@ -7,7 +7,7 @@ import AccountInfo from './AccountInfo';
 import MasterCard from './Card';
 
 const Account = () => {
-  const [account, setAccount] = useState<any>(null);
+  const [account, setAccount] = useState<account>();
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
   const { id, token } = user;
   const url = process.env.REACT_APP_API_URL + '/accounts';

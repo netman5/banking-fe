@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { BsArrowLeftCircleFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { User } from '../../types/appTypes'
+import { createTransactionData, transaction, User } from '../../types/appTypes'
 import { postTransaction } from '../../utils'
 import CreateTransactionButton from '../Buttons/Button'
 import Success from './Success'
 
 
 const CreateNewTransaction = () => {
-  const [response, setResponse] = useState<any>(null)
+  const [response, setResponse] = useState<transaction>()
   const navigate = useNavigate()
   const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
   const url = process.env.REACT_APP_API_URL + '/transactions'
@@ -20,10 +20,10 @@ const CreateNewTransaction = () => {
     const data = Object.fromEntries(formData)
     let { amount, type, destinationAcctNumber } = data
 
-    const newData = {
+    const newData: createTransactionData = {
       amount: parseFloat(Number(amount).toFixed(2)),
-      type,
-      destinationAcctNumber
+      type: type as 'debit' | 'credit' | 'transfer',
+      destinationAcctNumber: destinationAcctNumber as string
     }
 
     await postTransaction(url, newData, token)
