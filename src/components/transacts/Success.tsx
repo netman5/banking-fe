@@ -21,12 +21,12 @@ const Success = (props: any) => {
             <p className='lead'>Transaction Type: {type}</p>
             <p className='lead'>Destination Account Number: {destinationAcctNumber}</p>
           </div>
-          {/* <div className='col-6'>
-      <p className='lead'>Account Number: {data.accountNumber}</p>
-      <p className='lead'>Account Balance: ${data.balance}</p>
-      <p className='lead'>Account Type: {data.accountType}</p>
-      <p className='lead'>Account Status: {data.status}</p>
-    </div> */}
+          <div className='col-6'>
+            <p className='lead'>Account Number: {data.accountNumber}</p>
+            <p className='lead'>Account Balance: ${data.balance}</p>
+            <p className='lead'>Account Type: {data.accountType}</p>
+            <p className='lead'>Account Status: {data.status}</p>
+          </div>
         </div><CreateTransactionButton /></>
       )}
     </div>
