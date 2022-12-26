@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
+import { AccountContext } from '../../context/accountContext';
+import { AccountContextType } from '../../types/appTypes';
 import CreateTransactionButton from '../Buttons/Button'
 
 const Success = (props: any) => {
+  const { account } = React.useContext(AccountContext) as AccountContextType;
   const isLoading = true
   const { data } = props
   const { _id, amount, type, destinationAcctNumber } = data
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     window.location.href = '/'
-  //   }, 60000)
-  // }, [])
-
+  useEffect(() => {
+    setTimeout(() => {
+      window.location.href = '/'
+    }, 60000)
+  }, [])
   return (
     <div>
       {!isLoading ? <div>Loading...</div> : (
@@ -22,10 +24,10 @@ const Success = (props: any) => {
             <p className='lead'>Destination Account Number: {destinationAcctNumber}</p>
           </div>
           <div className='col-6'>
-            <p className='lead'>Account Number: {data.accountNumber}</p>
-            <p className='lead'>Account Balance: ${data.balance}</p>
-            <p className='lead'>Account Type: {data.accountType}</p>
-            <p className='lead'>Account Status: {data.status}</p>
+            <p className='lead'>Account Number: {account.accountNumber}</p>
+            <p className='lead'>Account Balance: ${account.balance - amount}</p>
+            <p className='lead'>Account Type: Current</p>
+            <p className='lead'>Account Status: Active</p>
           </div>
         </div><CreateTransactionButton /></>
       )}

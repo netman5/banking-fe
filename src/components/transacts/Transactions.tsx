@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { BsArrowLeftCircleFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { createTransactionData, transaction, User } from '../../types/appTypes'
-import { postTransaction } from '../../utils'
-import CreateTransactionButton from '../Buttons/Button'
+import { AccountContext } from '../../context/accountContext'
+import { AccountContextType, createTransactionData, transaction, User } from '../../types/appTypes'
 import Success from './Success'
 
 
 const CreateNewTransaction = () => {
-  const [response, setResponse] = useState<transaction>()
+  const [response, setResponse] = useState<transaction | {}>()
   const navigate = useNavigate()
   const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
   const url = process.env.REACT_APP_API_URL + '/transactions'
+  const { createTransaction } = React.useContext(AccountContext) as AccountContextType;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -26,11 +26,10 @@ const CreateNewTransaction = () => {
       destinationAcctNumber: destinationAcctNumber as string
     }
 
-    await postTransaction(url, newData, token)
+    await createTransaction(url, newData, token)
       .then(res => setResponse(res))
       .catch(err => console.log(err))
   }
-  console.log(response);
 
   if (response) {
     return <div>

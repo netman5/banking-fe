@@ -57,8 +57,8 @@ export type transaction = {
 export type AccountContextType = {
   account: account;
   setAccount: React.Dispatch<React.SetStateAction<account>>;
-  // transaction: transaction[];
-  // setTransaction: React.Dispatch<React.SetStateAction<transaction[]>>;
+  transaction: transaction;
+  setTransaction: React.Dispatch<React.SetStateAction<transaction>>;
   // isLoading: boolean;
   // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 
