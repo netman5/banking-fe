@@ -5,6 +5,7 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Home from './components/Home/Home';
 import Layout from './components/Layouts/Layout';
+import Success from './components/transacts/Success';
 import CreateNewTransaction from './components/transacts/Transactions';
 import { User } from './types/appTypes';
 
@@ -22,6 +23,7 @@ function App() {
               <>
                 <Route path="/" element={<Home />} />
                 <Route path='/new-transactions' element={<CreateNewTransaction />} />
+                <Route path='/success' element={<Success />} />
               </>
             ) : <Route path="/login" element={<Login />} />}
           </Routes>

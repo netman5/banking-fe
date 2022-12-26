@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BsArrowLeftCircleFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { User } from '../../types/appTypes'
 import { postTransaction } from '../../utils'
+import CreateTransactionButton from '../Buttons/Button'
+import Success from './Success'
 
 
 const CreateNewTransaction = () => {
+  const [response, setResponse] = useState<any>(null)
   const navigate = useNavigate()
   const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
   const url = process.env.REACT_APP_API_URL + '/transactions'
@@ -18,21 +21,21 @@ const CreateNewTransaction = () => {
     let { amount, type, destinationAcctNumber } = data
 
     const newData = {
-      amount: Number(amount),
+      amount: parseFloat(Number(amount).toFixed(2)),
       type,
       destinationAcctNumber
     }
-    const response = await postTransaction(url, newData, token)
-    console.log(response);
 
-    if (response === 201) {
-      alert('Transaction created successfully')
-      setTimeout(() => {
-        navigate('/')
-      }, 2000);
-    } else {
-      alert('Transaction failed')
-    }
+    await postTransaction(url, newData, token)
+      .then(res => setResponse(res))
+      .catch(err => console.log(err))
+  }
+  console.log(response);
+
+  if (response) {
+    return <div>
+      <Success data={response} />
+    </div>
   }
 
   return (

@@ -25,5 +25,5 @@ export const postTransaction = async (url: string, data: any, token: string): Pr
       'Authorization': `Bearer ${token}`
     }
   });
-  return response.data.status;
+  return response.data;
 }
