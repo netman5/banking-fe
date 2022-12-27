@@ -9,11 +9,11 @@ const Success = (props: any) => {
   const { data } = props
   const { _id, amount, type, destinationAcctNumber } = data
 
-  useEffect(() => {
-    setTimeout(() => {
-      window.location.href = '/'
-    }, 60000)
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     window.location.href = '/'
+  //   }, 60000)
+  // }, [])
 
   useEffect(() => {
     const userAccount = async () => {
@@ -31,22 +31,27 @@ const Success = (props: any) => {
   }, [user.id, user.token])
 
   return (
-    <div>
+    <div className='container'>
       {!isLoading ? <div>Loading...</div> : (
-        <><h1 className='display-6 mb-5 text-center'>{`Your ${type} transaction was successfull`}</h1><h2 className='mb-5 text-center'>Transaction Details</h2><div className='row'>
-          <div className='col-6'>
-            <p className='lead'>Transaction ID: {_id}</p>
-            <p className='lead'>Transaction Amount: ${amount}</p>
-            <p className='lead'>Transaction Type: {type}</p>
-            <p className='lead'>Destination Account Number: {destinationAcctNumber}</p>
+        <><h1 className='display-6 mb-5 text-center'>{`Your ${type} transaction was successfull`}</h1><h2 className='mb-5 text-center'>Transaction Details</h2>
+          <div className='row p-3' style={{ 'margin': '0 auto', 'width': '80%' }}>
+            <div className='col-6'>
+              <p className='lead'>Transaction ID: {_id}</p>
+              <p className='lead'>Transaction Amount: ${amount}</p>
+              <p className='lead'>Transaction Type: {type}</p>
+              <p className='lead'>Destination Account Number: {destinationAcctNumber}</p>
+            </div>
+            <div className='col-6'>
+              <p className='lead'>Account Number: {account.accountNumber}</p>
+              <p className='lead'>Account Balance: ${account.balance}</p>
+              <p className='lead'>Account Type: Current</p>
+              <p className='lead'>Account Status: Active</p>
+            </div>
+            <div className='mt-5'>
+              <CreateTransactionButton />
+            </div>
           </div>
-          <div className='col-6'>
-            <p className='lead'>Account Number: {account.accountNumber}</p>
-            <p className='lead'>Account Balance: ${account.balance}</p>
-            <p className='lead'>Account Type: Current</p>
-            <p className='lead'>Account Status: Active</p>
-          </div>
-        </div><CreateTransactionButton /></>
+        </>
       )}
     </div>
   )

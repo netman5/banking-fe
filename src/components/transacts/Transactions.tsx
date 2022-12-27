@@ -48,10 +48,10 @@ const CreateNewTransaction = () => {
   return (
     <div className='container'>
       <button type='button' className='btn btn-primary mb-5' onClick={() => navigate('/')}><BsArrowLeftCircleFill /> Account</button>
-      <form onSubmit={handleSubmit} className='row g-3 w-75 mx-auto shadow-sm rounded p-5'>
+      <form onSubmit={handleSubmit} className='row g-3 w-75 mx-auto p-5'>
         <div className='col-md-6'>
           <label htmlFor="amount" className='form-label'>Amount</label>
-          <input type="number" name="amount" id="amount" className='form-control' />
+          <input type="number" name="amount" id="amount" className='form-control' placeholder='Amount' required />
         </div>
 
         <div className='col-md-6'>
@@ -65,7 +65,7 @@ const CreateNewTransaction = () => {
 
         <div className='col-md-6'>
           <label htmlFor="destinationAcctNumber" className='form-label'>Destination Account Number</label>
-          <input type="text" name="destinationAcctNumber" id="destinationAcctNumber" className='form-control' />
+          <input type="text" name="destinationAcctNumber" id="destinationAcctNumber" className='form-control' placeholder='Account number to transfer to' required />
         </div>
 
         <div className='d-grid col-2 mt-5'>
