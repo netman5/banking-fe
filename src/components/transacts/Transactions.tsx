@@ -46,24 +46,30 @@ const CreateNewTransaction = () => {
   }
 
   return (
-    <div>
-      <BsArrowLeftCircleFill onClick={() => navigate('/')} />
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="amount">Amount</label>
-          <input type="number" name="amount" id="amount" />
+    <div className='container'>
+      <button type='button' className='btn btn-primary mb-5' onClick={() => navigate('/')}><BsArrowLeftCircleFill /> Account</button>
+      <form onSubmit={handleSubmit} className='row g-3 w-75 mx-auto shadow-sm rounded p-5'>
+        <div className='col-md-6'>
+          <label htmlFor="amount" className='form-label'>Amount</label>
+          <input type="number" name="amount" id="amount" className='form-control' />
+        </div>
 
-          <label htmlFor="type">Type</label>
-          <select name="type" id="type">
+        <div className='col-md-6'>
+          <label htmlFor="type" className='form-label'>Type</label>
+          <select name="type" id="type" className='form-select'>
             <option value="debit">Debit</option>
             <option value="credit">Credit</option>
             <option value="transfer">Transfer</option>
           </select>
+        </div>
 
-          <label htmlFor="destinationAcctNumber">Destination Account Number</label>
-          <input type="text" name="destinationAcctNumber" id="destinationAcctNumber" />
+        <div className='col-md-6'>
+          <label htmlFor="destinationAcctNumber" className='form-label'>Destination Account Number</label>
+          <input type="text" name="destinationAcctNumber" id="destinationAcctNumber" className='form-control' />
+        </div>
 
-          <button type="submit">Submit</button>
+        <div className='d-grid col-2 mt-5'>
+          <button type="submit" className='btn btn-primary'>Submit</button>
         </div>
       </form>
     </div>
