@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
+import Error from './components/Error';
 import Home from './components/Home/Home';
 import Layout from './components/Layouts/Layout';
 import Success from './components/transacts/Success';
@@ -10,7 +11,7 @@ import CreateNewTransaction from './components/transacts/Transactions';
 import { User } from './types/appTypes';
 
 function App() {
-  const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
+  const { token, role }: User = JSON.parse(localStorage.getItem('user') || '{}');
   return (
     <div>
       <Router>
@@ -24,8 +25,17 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path='/new-transactions' element={<CreateNewTransaction />} />
                 <Route path='/success' element={<Success />} />
+
+                {role === 'admin' && (
+                  <>
+                    <Route path="/accounts" element={'accounts'} />
+                    <Route path='/accounts/new-account' element={'New account'} />
+                  </>
+                )}
               </>
-            ) : <Route path="/login" element={<Login />} />}
+            ) : ('')}
+
+            <Route path="*" element={<Error />} />
           </Routes>
         </Layout>
       </Router>

@@ -7,7 +7,7 @@ import classes from './Layout.module.css'
 const Navigation = (): JSX.Element => {
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
   const navigate = useNavigate();
-  const { token } = user;
+  const { token, role } = user;
 
   const logoutHandler = () => {
     logout();
@@ -16,7 +16,7 @@ const Navigation = (): JSX.Element => {
 
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>Ficti Bank</div>
+      <div className={classes.logo}><Link to={token ? '/' : '/login'}>Ficti Bank</Link></div>
       <nav>
         <ul>
           {token ? (
@@ -28,6 +28,19 @@ const Navigation = (): JSX.Element => {
               <li onClick={logoutHandler}>
                 <Link to="/login">Logout</Link>
               </li>
+
+              {role === 'admin' && (
+                <>
+                  <li>
+                    <Link to="/accounts">Accounts</Link>
+                  </li>
+
+                  <li>
+                    <Link to="/new-account">Create Account</Link>
+                  </li>
+
+                </>
+              )}
             </>
           ) : (
             <>
