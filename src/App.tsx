@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import NewAccount from './components/admin/NewAccount';
+import AccountPage from './components/admin/UI/AccountHome';
+import Users from './components/admin/UI/Users';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Error from './components/Error';
@@ -29,6 +31,8 @@ function App() {
 
                 {role === 'admin' && (
                   <>
+                    <Route path='/accounts' element={<AccountPage />} />
+                    <Route path='/users' element={<Users />} />
                     <Route path='/accounts/new-account' element={<NewAccount />} />
                   </>
                 )}

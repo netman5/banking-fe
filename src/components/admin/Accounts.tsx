@@ -1,8 +1,16 @@
 import React from 'react'
+import { AccountsProps } from '../../interfaces/interface'
+import Dataview from './UI/Dashboard'
+import SidePanel from './UI/SidePanel'
 
-const Accounts = () => {
+const Accounts = ({ children }: AccountsProps) => {
   return (
-    <div>Accounts</div>
+    <div className='container'>
+      <SidePanel />
+      <Dataview>
+        {children}
+      </Dataview>
+    </div>
   )
 }
 

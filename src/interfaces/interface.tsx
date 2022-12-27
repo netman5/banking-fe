@@ -21,3 +21,11 @@ export interface Transaction {
   amount: number;
   accountId: string;
 }
+
+export interface DashboardProps {
+  children: React.ReactNode;
+}
+
+export interface AccountsProps {
+  children?: React.ReactNode;
+}
