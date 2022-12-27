@@ -1,0 +1,31 @@
+.container{
+  width: 95%;
+  display: flex;
+  margin: 0 auto;
+}
+
+.spendingBox{
+  border: 1px solid blue;
+  width: 100%;
+  display: flex;
+}
+
+.spending{
+  width: 65%;
+  border: 1px solid red;
+  background-color: #F3F7FD;
+}
+
+.account{
+  width: 35%;
+  border: 1px solid red;
+  padding: 0 20px;
+}
+
+/* .info{
+  border: 1px solid red;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+} */

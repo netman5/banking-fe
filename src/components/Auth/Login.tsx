@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import Styles from './Auth.module.css';
 import { Link } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { loginData } from '../../types/appTypes';
 
 const url = process.env.REACT_APP_API_URL + '/auth/login';
 
 const Login = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
@@ -22,7 +22,7 @@ const Login = () => {
     try {
       const response = await axios.post(url, data);
       localStorage.setItem("user", JSON.stringify(response.data));
-      // navigate('/');
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +39,7 @@ const Login = () => {
         </div>
 
         <div className={Styles.loginRight}>
-          <form className={Styles.loginBox} onSubmit={handleSubmit}>
+          <form className={`${Styles.loginBox} ${Styles.authBox}`} onSubmit={handleSubmit}>
             <input
               type="email"
               placeholder="Email"
@@ -52,7 +52,6 @@ const Login = () => {
               type="password"
               placeholder="Password"
               required
-              // minLength="6"
               ref={password}
               className={Styles.loginInput}
             />
