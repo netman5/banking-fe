@@ -3,15 +3,17 @@ import { BsArrowLeftCircleFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { AccountContext } from '../../context/accountContext'
 import { AccountContextType, createTransactionData, transaction, User } from '../../types/appTypes'
+import InsufficientFunds from './InsufficientFunds'
 import Success from './Success'
 
 
 const CreateNewTransaction = () => {
   const [response, setResponse] = useState<transaction | {}>()
+  const [formData, setFormData] = useState<createTransactionData>({} as createTransactionData)
   const navigate = useNavigate()
   const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
   const url = process.env.REACT_APP_API_URL + '/transactions'
-  const { createTransaction } = React.useContext(AccountContext) as AccountContextType;
+  const { createTransaction, account } = React.useContext(AccountContext) as AccountContextType;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -25,10 +27,16 @@ const CreateNewTransaction = () => {
       type: type as 'debit' | 'credit' | 'transfer',
       destinationAcctNumber: destinationAcctNumber as string
     }
-
+    setFormData(newData)
     await createTransaction(url, newData, token)
       .then(res => setResponse(res))
       .catch(err => console.log(err))
+  }
+
+  if (formData.amount > account?.balance && formData.type === 'debit') {
+    return <div>
+      <InsufficientFunds />
+    </div>
   }
 
   if (response) {

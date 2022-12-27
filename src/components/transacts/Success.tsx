@@ -1,18 +1,35 @@
 import React, { useEffect } from 'react'
-import { AccountContext } from '../../context/accountContext';
-import { AccountContextType } from '../../types/appTypes';
+import { User, account } from '../../types/appTypes';
 import CreateTransactionButton from '../Buttons/Button'
 
 const Success = (props: any) => {
-  const { account } = React.useContext(AccountContext) as AccountContextType;
+  const user: User = JSON.parse(localStorage.getItem('user') || '{}');
+  const [account, setAccount] = React.useState<account>({} as account);
   const isLoading = true
   const { data } = props
   const { _id, amount, type, destinationAcctNumber } = data
+
   useEffect(() => {
     setTimeout(() => {
       window.location.href = '/'
     }, 60000)
   }, [])
+
+  useEffect(() => {
+    const userAccount = async () => {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/${user.id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
+      const data = await response.json()
+      setAccount(data)
+    }
+    userAccount();
+  }, [user.id, user.token])
+
   return (
     <div>
       {!isLoading ? <div>Loading...</div> : (
@@ -25,7 +42,7 @@ const Success = (props: any) => {
           </div>
           <div className='col-6'>
             <p className='lead'>Account Number: {account.accountNumber}</p>
-            <p className='lead'>Account Balance: ${account.balance - amount}</p>
+            <p className='lead'>Account Balance: ${account.balance}</p>
             <p className='lead'>Account Type: Current</p>
             <p className='lead'>Account Status: Active</p>
           </div>
