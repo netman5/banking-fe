@@ -1,6 +1,7 @@
 import React from 'react'
 import { User } from '../../types/appTypes';
 import Account from '../Acoount/Account'
+import Accounts from '../admin/Accounts';
 import styles from './Home.module.css'
 
 const Home = () => {
@@ -9,7 +10,7 @@ const Home = () => {
     <div className={styles.container}>
       {user.role === 'admin' ? (
         <>
-          <h1>Admin</h1>
+          <Accounts />
         </>
       ) : <Account />}
     </div>
