@@ -32,11 +32,7 @@ const Navigation = (): JSX.Element => {
               {role === 'admin' && (
                 <>
                   <li>
-                    <Link to="/accounts">Accounts</Link>
-                  </li>
-
-                  <li>
-                    <Link to="/new-account">Create Account</Link>
+                    <Link to="/accounts/new-account">Create Account</Link>
                   </li>
 
                 </>
