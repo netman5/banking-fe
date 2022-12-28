@@ -1,9 +1,9 @@
 import React from 'react'
-import Accounts from '../Accounts'
+import AccountsWrapper from '../Accounts'
 
 function Users() {
   return (
-    <Accounts>Users</Accounts>
+    <AccountsWrapper>Users</AccountsWrapper>
   )
 }
 

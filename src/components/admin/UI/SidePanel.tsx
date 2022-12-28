@@ -5,8 +5,9 @@ import { HiOutlineHome } from 'react-icons/hi'
 import { FiUsers } from 'react-icons/fi'
 import { AiOutlineUser } from 'react-icons/ai'
 import { IoWalletOutline } from 'react-icons/io5'
+import { sideLinksType } from '../../../types/appTypes'
 
-const sideLinks = [
+const sideLinks: sideLinksType = [
   { icons: <HiOutlineHome />, link: '/accounts', text: 'Accounts' },
   { icons: <IoWalletOutline />, link: '/accounts/new-account', text: 'Create Account' },
   { icons: <FiUsers />, link: '/users', text: 'Users' },

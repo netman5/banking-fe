@@ -1,9 +1,9 @@
 import React from 'react'
-import Accounts from './Accounts'
+import AccountsWrapper from './Accounts'
 
 const NewAccount = () => {
   return (
-    <Accounts>NewAccount</Accounts>
+    <AccountsWrapper>NewAccount</AccountsWrapper>
   )
 }
 

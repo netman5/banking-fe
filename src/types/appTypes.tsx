@@ -54,6 +54,13 @@ export type transaction = {
   destinationAcctNumber: string;
 }
 
+export type sideLinksType = {
+  icons: JSX.Element;
+  link: string;
+  text: string;
+}[]
+
+
 export type AccountContextType = {
   account: account;
   setAccount: React.Dispatch<React.SetStateAction<account>>;

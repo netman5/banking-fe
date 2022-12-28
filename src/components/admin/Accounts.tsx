@@ -2,16 +2,20 @@ import React from 'react'
 import { AccountsProps } from '../../interfaces/interface'
 import Dataview from './UI/Dashboard'
 import SidePanel from './UI/SidePanel'
+import styles from './UI/Dashboard.module.css'
 
-const Accounts = ({ children }: AccountsProps) => {
-  return (
-    <div className='container'>
-      <SidePanel />
-      <Dataview>
-        {children}
-      </Dataview>
-    </div>
-  )
-}
+const AccountsWrapper
+  = ({ children }: AccountsProps) => {
+    return (
+      <div className={`row ${styles.container}`}>
+        <div className='col-md-2'>
+          <SidePanel />
+        </div>
+        <div className='col-md-10'>
+          <Dataview>{children}</Dataview>
+        </div>
+      </div>
+    )
+  }
 
-export default Accounts
+export default AccountsWrapper
