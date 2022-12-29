@@ -28,8 +28,8 @@ export const postTransaction = async (url: string, data: any, token: string): Pr
   return response.data;
 }
 
-export const getTransactionsByUserId = async (url: string, token: string): Promise<any> => {
-  const response = await axios.get(`${url}`, {
+export const getTransactionsByUserId = async (url: string, token: string, id: string | undefined): Promise<any> => {
+  const response = await axios.get(`${url}/${id}`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

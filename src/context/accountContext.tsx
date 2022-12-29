@@ -10,6 +10,7 @@ interface AccountProviderProps {
 export const AccountProvider = ({ children }: AccountProviderProps) => {
   const [account, setAccount] = React.useState<account>({} as account);
   const [transaction, setTransaction] = React.useState<transaction>({} as transaction);
+  const [accounts, setAccounts] = React.useState<account[]>([]);
 
   const createTransaction = async (url: string, data: createTransactionData, token: string) => {
     const response = await axios.post(url, data, {
@@ -40,7 +41,7 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
   }
 
 
-  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts }}>
+  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accounts, setAccounts }}>
     {children}
   </AccountContext.Provider>
 

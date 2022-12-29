@@ -3,12 +3,15 @@ import { AccountContext } from '../../../context/accountContext';
 import { account, AccountContextType, User } from '../../../types/appTypes';
 import { getTransactionsByUserId } from '../../../utils';
 import AccountsWrapper from '../AccountsWrapper';
+import AccountDetails from './AccountDetails';
+import { useNavigate } from 'react-router-dom';
 
 const AccountPage = () => {
-  const [accounts, setAccounts] = React.useState<account[]>([]);
+  // const [accounts, setAccounts] = React.useState<account[]>([]);
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
-  const { getAllAccounts } = React.useContext(AccountContext) as AccountContextType;
+  const { getAllAccounts, setAccounts, accounts } = React.useContext(AccountContext) as AccountContextType;
   const url = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAccounts = async () => {
@@ -16,13 +19,14 @@ const AccountPage = () => {
       setAccounts(response);
     }
     getAccounts();
-  }, [getAllAccounts, user.token, url])
+  }, [getAllAccounts, user.token, url, setAccounts])
 
   const viewAccountById = async (id: string) => {
     const account = accounts.find(account => account.id === id);
-    const transactions = await getTransactionsByUserId(`${url}/transactions`, user.token)
-    if (account) {
-      console.log(account, transactions);
+    const transactions = await getTransactionsByUserId(`${url}/transactions`, user.token, account?.userId)
+    if (account && transactions) {
+      navigate(`/accounts/${id}`);
+      return <AccountDetails account={account} transactions={transactions} />
     }
   }
 
