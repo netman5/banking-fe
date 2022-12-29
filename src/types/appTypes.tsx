@@ -66,7 +66,6 @@ export type AccountContextType = {
   setAccount: React.Dispatch<React.SetStateAction<account>>;
   transaction: transaction;
   setTransaction: React.Dispatch<React.SetStateAction<transaction>>;
-  // isLoading: boolean;
   // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 
   // login: (data: loginData) => Promise<void>;
@@ -76,5 +75,6 @@ export type AccountContextType = {
   getAccount: (url: string, id: string, token: string) => Promise<any>;
   // getTransactions: () => Promise<void>;
   createTransaction: (url: string, data: createTransactionData, token: string) => Promise<any>;
+  getAllAccounts: (url: string, token: string) => Promise<any>;
 }
 

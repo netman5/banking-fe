@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../types/appTypes';
 import Account from '../Acoount/Account'
-import Accounts from '../admin/Accounts';
+import Accounts from '../admin/AccountsWrapper';
 import styles from './Home.module.css'
 
 const Home = () => {

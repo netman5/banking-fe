@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { signupData } from './types/appTypes';
+import { signupData, transaction } from './types/appTypes';
 
 export const logout: Function = () => {
   localStorage.removeItem('user');
@@ -21,6 +21,15 @@ export const getAccountById = async (id: string, url: string, token: string): Pr
 
 export const postTransaction = async (url: string, data: any, token: string): Promise<any> => {
   const response = await axios.post(url, data, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  return response.data;
+}
+
+export const getTransactionsByUserId = async (url: string, token: string): Promise<any> => {
+  const response = await axios.get(`${url}`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

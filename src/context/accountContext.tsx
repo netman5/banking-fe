@@ -30,8 +30,17 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
 
   }
 
+  const getAllAccounts = async (url: string, token: string) => {
+    const response = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }
 
-  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction }}>
+
+  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts }}>
     {children}
   </AccountContext.Provider>
 

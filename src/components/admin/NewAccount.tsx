@@ -1,5 +1,5 @@
 import React from 'react'
-import AccountsWrapper from './Accounts'
+import AccountsWrapper from './AccountsWrapper'
 
 const NewAccount = () => {
   return (

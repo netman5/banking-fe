@@ -40,9 +40,11 @@ const CreateNewTransaction = () => {
   }
 
   if (response) {
-    return <div>
-      <Success data={response} />
-    </div>
+    return (
+      <div>
+        <Success data={response} />
+      </div>
+    )
   }
 
   return (
