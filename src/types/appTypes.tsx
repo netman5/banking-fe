@@ -52,6 +52,8 @@ export type transaction = {
   amount: number;
   type: string;
   destinationAcctNumber: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type sideLinksType = {

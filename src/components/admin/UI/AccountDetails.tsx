@@ -3,6 +3,8 @@ import { AccountContext } from '../../../context/accountContext';
 import { AccountContextType } from '../../../types/appTypes';
 import { BsArrowLeftCircleFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
+import dateFormat, { masks } from "dateformat";
+
 
 const AccountDetails = () => {
   const { accountDetail, transactions } = React.useContext(AccountContext) as AccountContextType;
@@ -35,16 +37,18 @@ const AccountDetails = () => {
               <th scope='col'>Type</th>
               <th scope='col'>Transaction ID</th>
               <th scope='col'>Account Number</th>
+              <th scope='col'>Date</th>
             </tr>
           </thead>
           <tbody>
-            {transactions.map((transaction, index) => (
+            {transactions.length === 0 ? <div className=''><p className='lead mx'>No transactions</p></div> : transactions.map((transaction, index) => (
               <tr key={transaction._id}>
                 <th scope='row'>{index + 1}</th>
                 <td>${transaction.amount}</td>
                 <td>{transaction.type}</td>
                 <td>{transaction._id}</td>
                 <td>{transaction.destinationAcctNumber}</td>
+                <td>{dateFormat(transaction.createdAt)}</td>
               </tr>
             ))}
           </tbody>
