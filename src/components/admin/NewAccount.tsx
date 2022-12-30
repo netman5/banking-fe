@@ -3,7 +3,7 @@ import AccountsWrapper from './AccountsWrapper'
 
 const NewAccount = () => {
   return (
-    <AccountsWrapper>NewAccount</AccountsWrapper>
+    <AccountsWrapper>New Account</AccountsWrapper>
   )
 }
 

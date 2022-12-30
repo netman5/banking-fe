@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountContextType, createTransactionData, account, transaction } from "../types/appTypes";
+import { AccountContextType, createTransactionData, account, transaction, registeredUser } from "../types/appTypes";
 import axios from 'axios';
 
 export const AccountContext = React.createContext<AccountContextType | null>(null);
@@ -12,6 +12,7 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
   const [transaction, setTransaction] = React.useState<transaction>({} as transaction);
   const [accountDetail, setAccountDetail] = React.useState<account>({} as account);
   const [transactions, setTransactions] = React.useState<transaction[]>([]);
+  const [registeredUsers, setRegisteredUsers] = React.useState<registeredUser[]>([]);
 
   const createTransaction = async (url: string, data: createTransactionData, token: string) => {
     const response = await axios.post(url, data, {
@@ -41,8 +42,16 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
     return response.data;
   }
 
+  const getAllUsers = async (url: string, token: string) => {
+    const response = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }
 
-  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions }}>
+  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers }}>
     {children}
   </AccountContext.Provider>
 

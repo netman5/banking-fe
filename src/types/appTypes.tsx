@@ -62,6 +62,15 @@ export type sideLinksType = {
   text: string;
 }[]
 
+export type registeredUser = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  phone_number: string;
+  role: string;
+}
+
 
 export type AccountContextType = {
   account: account;
@@ -72,6 +81,9 @@ export type AccountContextType = {
   setAccountDetail: React.Dispatch<React.SetStateAction<account>>;
   transactions: transaction[];
   setTransactions: React.Dispatch<React.SetStateAction<transaction[]>>;
+  registeredUsers: registeredUser[];
+  setRegisteredUsers: React.Dispatch<React.SetStateAction<registeredUser[]>>;
+
 
   // login: (data: loginData) => Promise<void>;
   // signup: (data: signupData) => Promise<void>;
@@ -81,5 +93,6 @@ export type AccountContextType = {
   // getTransactions: () => Promise<void>;
   createTransaction: (url: string, data: createTransactionData, token: string) => Promise<any>;
   getAllAccounts: (url: string, token: string) => Promise<any>;
+  getAllUsers: (url: string, token: string) => Promise<registeredUser[]>;
 }
 

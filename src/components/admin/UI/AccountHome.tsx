@@ -43,7 +43,7 @@ const AccountPage = () => {
                 <th scope='col'>Balance</th>
                 <th scope='col'>Type</th>
                 <th scope='col'>Status</th>
-                <th scope='col'>Check</th>
+                <th scope='col'>Action</th>
               </tr>
             </thead>
             <tbody>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { signupData, transaction } from './types/appTypes';
+import { signupData } from './types/appTypes';
 
 export const logout: Function = () => {
   localStorage.removeItem('user');

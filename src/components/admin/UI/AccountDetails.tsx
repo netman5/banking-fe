@@ -3,7 +3,7 @@ import { AccountContext } from '../../../context/accountContext';
 import { AccountContextType } from '../../../types/appTypes';
 import { BsArrowLeftCircleFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
 
 
 const AccountDetails = () => {

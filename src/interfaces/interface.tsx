@@ -1,12 +1,3 @@
-export interface User {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-}
-
 export interface Account {
   id: string;
   accountNumber: string;
