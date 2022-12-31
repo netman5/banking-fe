@@ -4,6 +4,7 @@ import './App.css';
 import NewAccount from './components/admin/NewAccount';
 import AccountDetails from './components/admin/UI/AccountDetails';
 import AccountPage from './components/admin/UI/AccountHome';
+import UpdateUser from './components/admin/UI/UpdateUser';
 import Users from './components/admin/UI/Users';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
@@ -36,6 +37,7 @@ function App() {
                     <Route path='/users' element={<Users />} />
                     <Route path='/accounts/new-account' element={<NewAccount />} />
                     <Route path='/accounts/:id' element={<AccountDetails />} />
+                    <Route path='/accounts/:id/update' element={<UpdateUser />} />
                   </>
                 )}
               </>

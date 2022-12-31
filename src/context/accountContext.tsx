@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountContextType, createTransactionData, account, transaction, registeredUser } from "../types/appTypes";
+import { AccountContextType, createTransactionData, account, transaction, registeredUser, updateUserType } from "../types/appTypes";
 import axios from 'axios';
 
 export const AccountContext = React.createContext<AccountContextType | null>(null);
@@ -51,7 +51,25 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
     return response.data;
   }
 
-  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers }}>
+  const deleteAUser = async (url: string, id: string, token: string) => {
+    const response = await axios.delete(`${url}/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }
+
+  const updateUser = async (id: string, url: string, data: updateUserType, token: string) => {
+    const response = await axios.patch(`${url}/${id}`, data, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }
+
+  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers, deleteAUser, updateUser }}>
     {children}
   </AccountContext.Provider>
 
