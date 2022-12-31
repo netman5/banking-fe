@@ -60,7 +60,7 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
     return response.data;
   }
 
-  const updateUser = async (id: string, url: string, data: updateUserType, token: string) => {
+  const updateUser = async (id: string | undefined, url: string, data: updateUserType, token: string) => {
     const response = await axios.patch(`${url}/${id}`, data, {
       headers: {
         'Authorization': `Bearer ${token}`

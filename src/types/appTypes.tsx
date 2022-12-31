@@ -75,9 +75,11 @@ export type updateUserType = {
   id: string;
   name: string;
   email: string;
-  password?: string;
+  password: string;
   phone_number: string;
 }
+
+type updateId = string | undefined;
 
 
 export type AccountContextType = {
@@ -101,7 +103,7 @@ export type AccountContextType = {
   createTransaction: (url: string, data: createTransactionData, token: string) => Promise<any>;
   getAllAccounts: (url: string, token: string) => Promise<any>;
   getAllUsers: (url: string, token: string) => Promise<registeredUser[]>;
-  updateUser: (id: string, url: string, data: updateUserType, token: string) => Promise<updateUserType>;
+  updateUser: (id: updateId, url: string, data: updateUserType, token: string) => Promise<any>;
   deleteAUser: (url: string, id: string, token: string) => Promise<any>;
 }
 
