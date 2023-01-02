@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AccountContext } from '../../../context/accountContext';
 import { AccountContextType, registeredUser, User } from '../../../types/appTypes';
 
@@ -8,7 +8,10 @@ const UpdateUser = () => {
   const params = useParams<{ id: string }>();
   const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
   const [suceess, setSuccess] = React.useState<boolean>(false);
+  const [inputs, setInputs] = React.useState<registeredUser>({} as registeredUser);
+  const navigate = useNavigate();
 
+  console.log(inputs);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -32,6 +35,7 @@ const UpdateUser = () => {
     if (password) updatedUser.password = password;
 
     const res = await updateUser(params.id, process.env.REACT_APP_API_URL + '/auth/users', updatedUser, token);
+    setInputs(res.data)
 
     if (res) {
       nameRef.current!.value = '';
@@ -45,6 +49,10 @@ const UpdateUser = () => {
 
   const handleDismiss = () => {
     setSuccess(false);
+
+    setTimeout(() => {
+      setSuccess(false);
+    }, 3000);
   }
 
   return (
@@ -53,25 +61,28 @@ const UpdateUser = () => {
         User updated successfully
         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => handleDismiss()}></button>
       </div>}
-      <h1 className='display-6'>Update User</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
+      <h1 className='display-6 mb-5 text-center'>Update User</h1>
+      <form onSubmit={handleSubmit} className='row w-50 mx-auto'>
+        <div className="form-group col-md-12 mb-3">
           <label htmlFor="name">Name</label>
           <input type="text" className="form-control" id="name" ref={nameRef} />
         </div>
-        <div className="form-group">
+        <div className="form-group col-md-12 mb-3">
           <label htmlFor="email">Email</label>
           <input type="email" className="form-control" id="email" ref={emailRef} />
         </div>
-        <div className="form-group">
+        <div className="form-group col-md-12 mb-3">
           <label htmlFor="phone">Phone</label>
           <input type="text" className="form-control" id="phone" ref={phoneRef} />
         </div>
-        <div className="form-group">
+        <div className="form-group col-md-12 mb-3">
           <label htmlFor="password">Password</label>
           <input type="password" className="form-control" id="password" ref={passwordRef} />
         </div>
-        <button type="submit" className="btn btn-primary">Update</button>
+        <div className='col-md-12 mt-3' style={{ 'display': 'flex', 'gap': '20px' }}>
+          <button type="submit" className="btn btn-primary p-2 col-md-4">Update</button>
+          <button type="button" className="btn btn-secondary p-2 col-md-4" onClick={() => navigate('/users')}>Return to Users</button>
+        </div>
       </form>
     </div>
   )
