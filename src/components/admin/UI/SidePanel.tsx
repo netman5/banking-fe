@@ -9,7 +9,7 @@ import { sideLinksType } from '../../../types/appTypes'
 
 const sideLinks: sideLinksType = [
   { icons: <HiOutlineHome />, link: '/accounts', text: 'Accounts' },
-  { icons: <IoWalletOutline />, link: '/accounts/new-account', text: 'Create Account' },
+  { icons: <IoWalletOutline />, link: '/accounts/new', text: 'Create Account' },
   { icons: <FiUsers />, link: '/users', text: 'Users' },
   { icons: <AiOutlineUser />, link: '#', text: 'Admins' },
 ]

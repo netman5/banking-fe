@@ -28,14 +28,15 @@ function App() {
             {token ? (
               <>
                 <Route path="/" element={<Home />} />
-                <Route path='/new-transactions' element={<CreateNewTransaction />} />
+                <Route path='/transactions' element={'transactions'} />
+                <Route path='/transactions/new' element={<CreateNewTransaction />} />
                 <Route path='/success' element={<Success />} />
 
                 {role === 'admin' && (
                   <>
                     <Route path='/accounts' element={<AccountPage />} />
                     <Route path='/users' element={<Users />} />
-                    <Route path='/accounts/new-account' element={<NewAccount />} />
+                    <Route path='/accounts/new' element={<NewAccount />} />
                     <Route path='/accounts/:id' element={<AccountDetails />} />
                     <Route path='/accounts/:id/update' element={<UpdateUser />} />
                   </>
