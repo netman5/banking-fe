@@ -66,7 +66,7 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
         'Authorization': `Bearer ${token}`
       }
     });
-    return response.data;
+    return response;
   }
 
   return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers, deleteAUser, updateUser }}>
