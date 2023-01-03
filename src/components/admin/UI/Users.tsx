@@ -22,7 +22,7 @@ function Users() {
   }
 
   const updateUserById = async (id: string) => {
-    navigate(`/accounts/${id}/update`, { state: { id, registeredUsers }, });
+    navigate(`/accounts/${id}/update`, { state: { id }, });
   }
 
   return (
@@ -36,7 +36,7 @@ function Users() {
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
-              <th scope="col">Id</th>
+              <th scope="col">User Id</th>
               <th scope="col">Phone</th>
               <th scope="col"></th>
               <th scope="col"></th>
@@ -46,10 +46,10 @@ function Users() {
             {registeredUsers.map((user, index) => (
               <tr key={user.id}>
                 <th scope="row">{index + 1}</th>
-                <td id='updateName'>{user.name}</td>
-                <td id='updateEmail'>{user.email}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
                 <td>{user.id}</td>
-                <td id='updatePhone'>{user.phone_number}</td>
+                <td>{user.phone_number}</td>
                 <td><button className='btn btn-dark' onClick={() => deleteUserById(user.id)}>X</button>
                 </td>
                 <td><button className='btn btn-dark' onClick={() => updateUserById(user.id)}>Edit</button></td>
