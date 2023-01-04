@@ -93,6 +93,8 @@ export type AccountContextType = {
   setTransactions: React.Dispatch<React.SetStateAction<transaction[]>>;
   registeredUsers: registeredUser[];
   setRegisteredUsers: React.Dispatch<React.SetStateAction<registeredUser[]>>;
+  accounts: account[];
+  setAccounts: React.Dispatch<React.SetStateAction<account[]>>;
 
 
   // login: (data: loginData) => Promise<void>;

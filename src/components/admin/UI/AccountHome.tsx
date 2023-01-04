@@ -6,9 +6,8 @@ import AccountsWrapper from '../AccountsWrapper';
 import { useNavigate } from 'react-router-dom';
 
 const AccountPage = () => {
-  const [accounts, setAccounts] = React.useState<account[]>([]);
   const user: User = JSON.parse(localStorage.getItem('user') || '{}');
-  const { getAllAccounts, setAccountDetail, setTransactions } = React.useContext(AccountContext) as AccountContextType;
+  const { getAllAccounts, setAccountDetail, setTransactions, accounts, setAccounts } = React.useContext(AccountContext) as AccountContextType;
   const url = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 

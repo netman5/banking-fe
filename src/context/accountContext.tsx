@@ -9,6 +9,7 @@ interface AccountProviderProps {
 }
 export const AccountProvider = ({ children }: AccountProviderProps) => {
   const [account, setAccount] = React.useState<account>({} as account);
+  const [accounts, setAccounts] = React.useState<account[]>([]);
   const [transaction, setTransaction] = React.useState<transaction>({} as transaction);
   const [accountDetail, setAccountDetail] = React.useState<account>({} as account);
   const [transactions, setTransactions] = React.useState<transaction[]>([]);
@@ -69,7 +70,7 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
     return response;
   }
 
-  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers, deleteAUser, updateUser }}>
+  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers, deleteAUser, updateUser, accounts, setAccounts }}>
     {children}
   </AccountContext.Provider>
 
