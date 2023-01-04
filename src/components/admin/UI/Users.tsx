@@ -22,7 +22,7 @@ function Users() {
   }
 
   const updateUserById = async (id: string) => {
-    navigate(`/accounts/${id}/update`, { state: { id }, });
+    navigate(`/accounts/${id}/update`, { state: { id } });
   }
 
   return (
@@ -45,6 +45,11 @@ function Users() {
           <tbody>
             {registeredUsers.map((user, index) => {
               const account = accounts.find((account) => account.userId === user.id);
+              const data = {
+                id: user.id,
+                name: user.name,
+                accountNumber: user.phone_number
+              }
               return (
                 <tr key={user.id}>
                   <th scope="row">{index + 1}</th>
@@ -57,7 +62,7 @@ function Users() {
                   <td><button className='btn btn-dark' onClick={() => updateUserById(user.id)}>Edit</button></td>
                   {!accounts.includes(account as any) ? (
                     <td>
-                      <button className='btn btn-dark' onClick={() => navigate(`/accounts/${user.id}/new`)}>Create Account</button>
+                      <button className='btn btn-dark' onClick={() => navigate(`/accounts/${user.id}/new`, { state: { data } })}>Create Account</button>
                     </td>
                   ) : ''}
                 </tr>

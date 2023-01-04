@@ -1,22 +1,26 @@
 import React from 'react'
 import AccountsWrapper from './AccountsWrapper'
+import { useParams } from 'react-router-dom';
 
 const NewAccount = () => {
   const nameRef = React.useRef<HTMLInputElement>(null)
   const accountRef = React.useRef<HTMLInputElement>(null)
+  const paramsData = useParams<{ data: any }>();
+
+  console.log(paramsData)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const data = {
-      id: '1',
-      name: nameRef.current?.value,
-      accountNumber: accountRef.current?.value
-    }
-    console.log(nameRef.current?.value)
-    console.log(accountRef.current?.value)
+    //   const data = {
+    //     id: '1',
+    //     name: nameRef.current?.value,
+    //     accountNumber: accountRef.current?.value
+    //   }
+    //   console.log(nameRef.current?.value)
+    //   console.log(accountRef.current?.value)
+    // }
   }
-
   return (
     <AccountsWrapper>
       <div>

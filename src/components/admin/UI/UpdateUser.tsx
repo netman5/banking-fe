@@ -11,8 +11,6 @@ const UpdateUser = () => {
   const [inputs, setInputs] = React.useState<registeredUser>({} as registeredUser);
   const navigate = useNavigate();
 
-  console.log(inputs);
-
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -49,11 +47,23 @@ const UpdateUser = () => {
 
   const handleDismiss = () => {
     setSuccess(false);
-
-    setTimeout(() => {
-      setSuccess(false);
-    }, 3000);
   }
+
+  React.useEffect(() => {
+    if (user) {
+      nameRef.current!.value = user.name;
+      emailRef.current!.value = user.email;
+      phoneRef.current!.value = user.phone_number;
+    }
+  }, [user])
+
+  React.useEffect(() => {
+    if (suceess) {
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+    }
+  }, [suceess])
 
   return (
     <div>
