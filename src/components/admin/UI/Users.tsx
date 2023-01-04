@@ -17,39 +17,6 @@ function Users() {
     fetchUsers();
   }, [getAllUsers, setRegisteredUsers, user.token])
 
-  // const filteredUsers = registeredUsers.map((user) => {
-  //   const account = accounts.find((account) => account.name === user.name);
-  //   !accounts.includes(account as any) ? (
-  //     <tr key={user.id}>
-  //       <th scope="row">{user.id}</th>
-  //       <td>{user.name}</td>
-  //       <td>{user.email}</td>
-  //       <td>{user.id}</td>
-  //       <td>{user.phone_number}</td>
-  //       <td><button className='btn btn-dark' onClick={() => deleteUserById(user.id)}>X</button>
-  //       </td>
-  //       <td><button className='btn btn-dark' onClick={() => updateUserById(user.id)}>Edit</button></td>
-  //       <td>
-  //         <button className='btn btn-dark' onClick={() => navigate(`/accounts/${user.id}/new`)}>Create Account</button>
-  //       </td>
-  //     </tr>
-  //   ) : (
-  //     <tr key={user.id}>
-  //       <th scope="row">{user.id}</th>
-  //       <td>{user.name}</td>
-  //       <td>{user.email}</td>
-  //       <td>{user.id}</td>
-  //       <td>{user.phone_number}</td>
-  //       <td><button className='btn btn-dark' onClick={() => deleteUserById(user.id)}>X</button>
-  //       </td>
-  //       <td><button className='btn btn-dark' onClick={() => updateUserById(user.id)}>Edit</button></td>
-  //     </tr>
-
-  //   )
-  //   return user;
-  // }
-  // )
-
   async function deleteUserById(id: string) {
     await deleteAUser(process.env.REACT_APP_API_URL + '/auth/users', id, user.token);
   }
@@ -76,22 +43,9 @@ function Users() {
             </tr>
           </thead>
           <tbody>
-            {/* {registeredUsers.map((user, index) => (
-              <tr key={user.id}>
-                <th scope="row">{index + 1}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.id}</td>
-                <td>{user.phone_number}</td>
-                <td><button className='btn btn-dark' onClick={() => deleteUserById(user.id)}>X</button>
-                </td>
-                <td><button className='btn btn-dark' onClick={() => updateUserById(user.id)}>Edit</button></td>
-              </tr>
-            ))} */}
-
             {registeredUsers.map((user, index) => {
-              const account = accounts.find((account) => account.name !== user.name);
-              return !accounts.includes(account as any) ? (
+              const account = accounts.find((account) => account.userId === user.id);
+              return (
                 <tr key={user.id}>
                   <th scope="row">{index + 1}</th>
                   <td>{user.name}</td>
@@ -101,20 +55,11 @@ function Users() {
                   <td><button className='btn btn-dark' onClick={() => deleteUserById(user.id)}>X</button>
                   </td>
                   <td><button className='btn btn-dark' onClick={() => updateUserById(user.id)}>Edit</button></td>
-                  <td>
-                    <button className='btn btn-dark' onClick={() => navigate(`/accounts/${user.id}/new`)}>Create Account</button>
-                  </td>
-                </tr>
-              ) : (
-                <tr key={user.id}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.id}</td>
-                  <td>{user.phone_number}</td>
-                  <td><button className='btn btn-dark' onClick={() => deleteUserById(user.id)}>X</button>
-                  </td>
-                  <td><button className='btn btn-dark' onClick={() => updateUserById(user.id)}>Edit</button></td>
+                  {!accounts.includes(account as any) ? (
+                    <td>
+                      <button className='btn btn-dark' onClick={() => navigate(`/accounts/${user.id}/new`)}>Create Account</button>
+                    </td>
+                  ) : ''}
                 </tr>
               )
             })}
