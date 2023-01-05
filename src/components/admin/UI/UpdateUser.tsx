@@ -7,7 +7,7 @@ const UpdateUser = () => {
   const { updateUser, registeredUsers } = React.useContext(AccountContext) as AccountContextType;
   const params = useParams<{ id: string }>();
   const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
-  const [suceess, setSuccess] = React.useState<boolean>(false);
+  const [success, setSuccess] = React.useState<boolean>(false);
   const [inputs, setInputs] = React.useState<registeredUser>({} as registeredUser);
   const navigate = useNavigate();
 
@@ -45,10 +45,6 @@ const UpdateUser = () => {
 
   }
 
-  const handleDismiss = () => {
-    setSuccess(false);
-  }
-
   React.useEffect(() => {
     if (user) {
       nameRef.current!.value = user.name;
@@ -58,18 +54,18 @@ const UpdateUser = () => {
   }, [user])
 
   React.useEffect(() => {
-    if (suceess) {
+    if (success) {
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
     }
-  }, [suceess])
+  }, [success])
 
   return (
     <div>
-      {suceess && <div className='alert alert-success alert-dismissible fade show' role="alert">
+      {success && <div className='alert alert-success alert-dismissible fade show' role="alert">
         User updated successfully
-        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => handleDismiss()}></button>
+        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setSuccess(false)}></button>
       </div>}
       <h1 className='display-6 mb-5 text-center'>Update User</h1>
       <form onSubmit={handleSubmit} className='row w-50 mx-auto'>

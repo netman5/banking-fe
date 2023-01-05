@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountContextType, createTransactionData, account, transaction, registeredUser, updateUserType } from "../types/appTypes";
+import { AccountContextType, createTransactionData, account, transaction, registeredUser, updateUserType, accountData } from "../types/appTypes";
 import axios from 'axios';
 
 export const AccountContext = React.createContext<AccountContextType | null>(null);
@@ -70,7 +70,16 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
     return response;
   }
 
-  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers, deleteAUser, updateUser, accounts, setAccounts }}>
+  const createAccount = async (url: string, data: accountData, token: string) => {
+    const response = await axios.post(url, data, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response;
+  }
+
+  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers, deleteAUser, updateUser, accounts, setAccounts, createAccount }}>
     {children}
   </AccountContext.Provider>
 

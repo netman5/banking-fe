@@ -27,9 +27,9 @@ export type signupData = {
 }
 
 export type accountData = {
-  name: string;
+  name: string | undefined;
   userId: string;
-  accountNumber: string;
+  accountNumber: string | undefined;
 }
 
 export type account = {
@@ -107,5 +107,6 @@ export type AccountContextType = {
   getAllUsers: (url: string, token: string) => Promise<registeredUser[]>;
   updateUser: (id: updateId, url: string, data: updateUserType, token: string) => Promise<any>;
   deleteAUser: (url: string, id: string, token: string) => Promise<any>;
+  createAccount: (url: string, data: accountData, token: string) => Promise<any>;
 }
 

@@ -62,7 +62,7 @@ function Users() {
                   <td><button className='btn btn-dark' onClick={() => updateUserById(user.id)}>Edit</button></td>
                   {!accounts.includes(account as any) ? (
                     <td>
-                      <button className='btn btn-dark' onClick={() => navigate(`/accounts/${user.id}/new`, { state: { data } })}>Create Account</button>
+                      <button className='btn btn-dark' onClick={() => navigate(`/accounts/${user.id}/new`, { state: data })}>Create Account</button>
                     </td>
                   ) : ''}
                 </tr>

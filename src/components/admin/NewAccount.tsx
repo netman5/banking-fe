@@ -1,29 +1,63 @@
 import React from 'react'
 import AccountsWrapper from './AccountsWrapper'
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AccountContext } from '../../context/accountContext';
+import { AccountContextType, User } from '../../types/appTypes';
 
 const NewAccount = () => {
   const nameRef = React.useRef<HTMLInputElement>(null)
   const accountRef = React.useRef<HTMLInputElement>(null)
-  const paramsData = useParams<{ data: any }>();
+  const location = useLocation()
+  const data = location.state as { id: string, name: string, accountNumber: string }
+  const [success, setSuccess] = React.useState<boolean>(false)
+  const { createAccount } = React.useContext(AccountContext) as AccountContextType;
+  const { token }: User = JSON.parse(localStorage.getItem('user') || '{}');
+  const navigation = useNavigate()
 
-  console.log(paramsData)
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const name = nameRef.current?.value
+    const account = accountRef.current?.value
 
-    //   const data = {
-    //     id: '1',
-    //     name: nameRef.current?.value,
-    //     accountNumber: accountRef.current?.value
-    //   }
-    //   console.log(nameRef.current?.value)
-    //   console.log(accountRef.current?.value)
-    // }
+    const newAccount = {
+      name,
+      userId: data.id,
+      accountNumber: account
+    }
+
+    const res = await createAccount(process.env.REACT_APP_API_URL + '/accounts', newAccount, token)
+
+    if (res) {
+      nameRef.current!.value = ''
+      accountRef.current!.value = ''
+      setSuccess(true)
+    }
+
   }
+
+  React.useEffect(() => {
+    if (data) {
+      nameRef.current!.value = data.name
+      accountRef.current!.value = data.accountNumber
+    }
+  }, [data])
+
+  React.useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+      navigation('/accounts')
+    }
+  }, [success, navigation])
+
   return (
     <AccountsWrapper>
       <div>
+        {success && <div className='alert alert-success alert-dismissible fade show' role="alert">
+          User updated successfully
+          <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setSuccess(false)}></button>
+        </div>}
         <h1 className='display-6'>New Account</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
