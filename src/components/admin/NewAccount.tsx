@@ -59,18 +59,20 @@ const NewAccount = () => {
           <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setSuccess(false)}></button>
         </div>}
         <h1 className='display-6'>New Account</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
+        <form onSubmit={handleSubmit} className='row'>
+          <div className="form-group col-md-6">
             <label htmlFor="name">Name</label>
             <input type="text" className="form-control" id="name" ref={nameRef} />
           </div>
 
-          <div className="form-group">
+          <div className="form-group col-md-6">
             <label htmlFor="account">Account Number</label>
             <input type="text" className="form-control" id="account" ref={accountRef} />
           </div>
 
-          <button>Create</button>
+          <div className='mt-3'>
+            <button type="submit" className="btn btn-primary">Create Account</button>
+          </div>
         </form>
       </div>
     </AccountsWrapper>

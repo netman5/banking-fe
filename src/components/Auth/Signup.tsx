@@ -3,20 +3,22 @@ import Styles from './Auth.module.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { postData } from '../../utils';
-import { signupData } from '../../types/appTypes';
+import { AccountContextType, signupData } from '../../types/appTypes';
+import { url } from 'inspector';
+import { AccountContext } from '../../context/accountContext';
 
-const url: string = process.env.REACT_APP_API_URL + '/auth/signup';
+// const url: string = process.env.REACT_APP_API_URL + '/auth/signup';
 
 const Signup = () => {
   const navigate = useNavigate();
-
+  const { signup } = React.useContext(AccountContext) as AccountContextType;
   const name = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const phoneNumber = useRef<HTMLInputElement>(null);
 
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data: signupData = {
@@ -27,8 +29,8 @@ const Signup = () => {
     };
 
     try {
-      const response = await postData(url, data);
-      if (response.status === 201) {
+      const response = await signup(process.env.REACT_APP_API_URL + '/auth/signup', data);
+      if (response) {
         navigate('/login');
       }
     } catch (error) {

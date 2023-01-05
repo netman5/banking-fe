@@ -6,8 +6,10 @@ export const logout: Function = () => {
 }
 
 export const postData = async (url: string, data: signupData): Promise<any> => {
-  const response = await axios.post(url, data);
-  return response.data;
+  // const response = await axios.post(url, data);
+  console.log(data);
+  // return response.data;
+
 }
 
 export const getAccountById = async (id: string, url: string, token: string): Promise<any> => {

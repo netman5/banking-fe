@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountContextType, createTransactionData, account, transaction, registeredUser, updateUserType, accountData } from "../types/appTypes";
+import { AccountContextType, createTransactionData, account, transaction, registeredUser, updateUserType, accountData, signupData } from "../types/appTypes";
 import axios from 'axios';
 
 export const AccountContext = React.createContext<AccountContextType | null>(null);
@@ -79,7 +79,12 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
     return response;
   }
 
-  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers, deleteAUser, updateUser, accounts, setAccounts, createAccount }}>
+  const signup = async (url: string, data: signupData) => {
+    const response = await axios.post(url, data);
+    return response.statusText;
+  }
+
+  return <AccountContext.Provider value={{ getAccount, createTransaction, account, setAccount, transaction, setTransaction, getAllAccounts, accountDetail, setAccountDetail, transactions, setTransactions, registeredUsers, setRegisteredUsers, getAllUsers, deleteAUser, updateUser, accounts, setAccounts, createAccount, signup }}>
     {children}
   </AccountContext.Provider>
 

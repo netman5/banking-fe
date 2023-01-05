@@ -1,10 +1,6 @@
 export type LayoutProps = {
   children: React.ReactNode;
-}
-
-export type Url = {
-  url: string;
-}
+};
 
 export type User = {
   id: string;
@@ -98,9 +94,7 @@ export type AccountContextType = {
 
 
   // login: (data: loginData) => Promise<void>;
-  // signup: (data: signupData) => Promise<void>;
-  // logout: () => void;
-  // createAccount: (data: accountData) => Promise<void>;
+  signup: (url: string, data: signupData) => Promise<string>;
   getAccount: (url: string, id: string, token: string) => Promise<any>;
   createTransaction: (url: string, data: createTransactionData, token: string) => Promise<any>;
   getAllAccounts: (url: string, token: string) => Promise<any>;
