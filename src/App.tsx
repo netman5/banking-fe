@@ -36,7 +36,7 @@ function App() {
                   <>
                     <Route path='/accounts' element={<AccountPage />} />
                     <Route path='/users' element={<Users />} />
-                    <Route path='/accounts/:id/new' element={<NewAccount />} />
+                    <Route path='/accounts/new' element={<NewAccount />} />
                     <Route path='/accounts/:id' element={<AccountDetails />} />
                     <Route path='/accounts/:id/update' element={<UpdateUser />} />
                   </>
